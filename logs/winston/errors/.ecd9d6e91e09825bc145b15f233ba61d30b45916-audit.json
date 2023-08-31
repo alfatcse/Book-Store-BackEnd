@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/apple/Desktop/Programming/Lavel2/Assignment8/Book Collection/logs/winston/errors/.ecd9d6e91e09825bc145b15f233ba61d30b45916-audit.json",
+    "files": [
+        {
+            "date": 1693500385786,
+            "name": "/Users/apple/Desktop/Programming/Lavel2/Assignment8/Book Collection/logs/winston/errors/phu-2023-31-08-18-error.log",
+            "hash": "60d286ecd07f843f15a16b331d1fe8216c18eb32c7be04e44f073d7f3c441fb5"
+        },
+        {
+            "date": 1693502054544,
+            "name": "/Users/apple/Desktop/Programming/Lavel2/Assignment8/Book Collection/logs/winston/errors/phu-2023-31-08-19-error.log",
+            "hash": "e6e57913d200eda43cdfbac7ce3a2f495e29ca91fc83e6bbeea8ef1470167d99"
+        }
+    ],
+    "hashType": "sha256"
+}
