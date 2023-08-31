@@ -11,7 +11,8 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
     secure: config.env === 'production',
     httpOnly: true,
   };
-  res.cookie('token', result.token, cookieOptions);
+  console.log(result);
+  res.cookie('authorization', result.token, cookieOptions);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -19,6 +20,29 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
     data: result.UserData,
   });
 });
+const getAllUsers = catchAsync(async (req: Request, res: Response) => {
+  //   let verifiedToken = null;
+  //   try {
+  //     verifiedToken = jwtHelpers.verifyToken(
+  //       req.cookies.token,
+  //       config.jwt.secret as Secret
+  //     );
+  //   } catch (error) {
+  //     throw new ApiError(httpStatus.FORBIDDEN, 'Invalid Token');
+  //   }
+  //   if (verifiedToken.role === 'admin') {
+  const result = await UserService.getAllUsers();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User retrieved Successfully',
+    data: result,
+  });
+  //   } else {
+  //     throw new ApiError(httpStatus.FORBIDDEN, 'Unauthorized Access');
+  //   }
+});
 export const UserController = {
   insertIntoDB,
+  getAllUsers,
 };

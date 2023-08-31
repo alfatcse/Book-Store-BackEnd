@@ -9,9 +9,10 @@ const auth =
   (...requiredRoles: string[]) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      //get authorization token
+      console.log(...requiredRoles);
+
       const token = req.headers.authorization;
-      // console.log(token);
+
       if (!token) {
         throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');
       }
@@ -19,9 +20,8 @@ const auth =
       let verifiedUser = null;
 
       verifiedUser = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
-      req.user = verifiedUser; // role  , userid
+      req.user = verifiedUser;
 
-      // role diye guard korar jnno
       if (requiredRoles.length && !requiredRoles.includes(verifiedUser.role)) {
         throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
       }
