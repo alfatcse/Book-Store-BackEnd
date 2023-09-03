@@ -39,6 +39,11 @@
             "date": 1693767890728,
             "name": "/Users/apple/Desktop/Programming/Lavel2/Assignment8/Book Collection/logs/winston/errors/phu-2023-03-09-21-error.log",
             "hash": "e705227cbbeaa6650f90350dd95af956f24f8ff2a38b53d376a7f049ea48418a"
+        },
+        {
+            "date": 1693771233320,
+            "name": "/Users/apple/Desktop/Programming/Lavel2/Assignment8/Book Collection/logs/winston/errors/phu-2023-03-09-22-error.log",
+            "hash": "21cfb47fa851e1dadd9f5d6cd7d67a8f3f175ae42c138fc7953cd8c10c48ca57"
         }
     ],
     "hashType": "sha256"
