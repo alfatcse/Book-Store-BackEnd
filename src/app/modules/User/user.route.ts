@@ -6,4 +6,5 @@ const router = express.Router();
 router.post('/signup', UserController.insertIntoDB);
 router.post('/signin', UserController.UserSignIn);
 router.get('/', auth(ENUM_USER_ROLE.ADMIN), UserController.getAllUsers);
+router.get('/:id', auth(ENUM_USER_ROLE.ADMIN), UserController.getSingleUser);
 export const UserRouter = router;

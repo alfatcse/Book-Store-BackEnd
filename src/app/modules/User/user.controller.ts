@@ -57,8 +57,18 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
   //     throw new ApiError(httpStatus.FORBIDDEN, 'Unauthorized Access');
   //   }
 });
+const getSingleUser = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.getSingleUser(req.params.id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Single User data retrieved Successfully',
+    data: result,
+  });
+});
 export const UserController = {
   insertIntoDB,
   getAllUsers,
   UserSignIn,
+  getSingleUser,
 };
