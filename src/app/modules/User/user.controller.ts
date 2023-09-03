@@ -75,10 +75,20 @@ const deleteSingleUser = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const updateUser = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.updateSingleUser(req.params.id, req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Single User data deleted Successfully',
+    data: result,
+  });
+});
 export const UserController = {
   insertIntoDB,
   getAllUsers,
   UserSignIn,
   getSingleUser,
   deleteSingleUser,
+  updateUser,
 };

@@ -101,10 +101,37 @@ const deleteSingleUser = async (id: string): Promise<Partial<User | null>> => {
   });
   return result;
 };
+const updateSingleUser = async (
+  id: string,
+  payload: Partial<User>
+): Promise<Partial<User | null>> => {
+  if (payload.password) {
+    const pass = await bcrypt.hash(
+      payload.password,
+      Number(config.bycrypt_salt_rounds)
+    );
+    payload.password = pass;
+  }
+  const result = await prisma.user.update({
+    where: { id },
+    data: payload,
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      contactNo: true,
+      address: true,
+      profileImg: true,
+    },
+  });
+  return result;
+};
 export const UserService = {
   insertIntoDB,
   getAllUsers,
   UserSignIn,
   getSingleUser,
   deleteSingleUser,
+  updateSingleUser,
 };
