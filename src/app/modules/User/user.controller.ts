@@ -20,6 +20,21 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
     data: result.UserData,
   });
 });
+const UserSignIn = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.UserSignIn(req.body);
+  console.log(result);
+  const cookieOptions = {
+    secure: config.env === 'production',
+    httpOnly: true,
+  };
+  res.cookie('authorization', result.token, cookieOptions);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User SignIn Successfully',
+    token: result.token,
+  });
+});
 const getAllUsers = catchAsync(async (req: Request, res: Response) => {
   //   let verifiedToken = null;
   //   try {
@@ -45,4 +60,5 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
 export const UserController = {
   insertIntoDB,
   getAllUsers,
+  UserSignIn,
 };

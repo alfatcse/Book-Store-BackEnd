@@ -6,7 +6,7 @@ import config from '../../../config';
 import ApiError from '../../../errors/ApiError';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
 import prisma from '../../../shared/prisma';
-import { IUser } from './user.interface';
+import { ISignInResponse, ISignInUser, IUser } from './user.interface';
 const insertIntoDB = async (data: User): Promise<IUser> => {
   const pass = await bcrypt.hash(
     data.password,
@@ -35,6 +35,28 @@ const insertIntoDB = async (data: User): Promise<IUser> => {
   );
   return { UserData: result, token: token };
 };
+const UserSignIn = async (data: ISignInUser): Promise<ISignInResponse> => {
+  const { email } = data;
+  const result = await prisma.user.findFirst({
+    where: { email },
+  });
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  const passwordMatch = await bcrypt.compare(data.password, result?.password);
+  if (passwordMatch) {
+    const token = jwtHelpers.createToken(
+      { userId: result?.id, role: result?.role },
+      config.jwt.secret as Secret,
+      config.jwt.expires_in as string
+    );
+    return {
+      token: token,
+    };
+  } else {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Password not matched');
+  }
+};
 const getAllUsers = async (): Promise<Partial<User>[]> => {
   const result = await prisma.user.findMany({
     select: {
@@ -52,4 +74,5 @@ const getAllUsers = async (): Promise<Partial<User>[]> => {
 export const UserService = {
   insertIntoDB,
   getAllUsers,
+  UserSignIn,
 };
