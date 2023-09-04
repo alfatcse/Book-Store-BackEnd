@@ -21,7 +21,6 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
 });
 const UserSignIn = catchAsync(async (req: Request, res: Response) => {
   const result = await UserService.UserSignIn(req.body);
-  console.log(result);
   const cookieOptions = {
     secure: config.env === 'production',
     httpOnly: true,

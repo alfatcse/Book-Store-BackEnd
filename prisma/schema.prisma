@@ -40,3 +40,25 @@ model Book {
   updatedAt       DateTime @updatedAt
   category        Category @relation(fields: [categoryId], references: [id])
 }
+
+enum OrderStatus {
+  pending
+  delivered
+  ordered
+}
+
+model Order {
+  id           String        @id @default(uuid())
+  userId       String
+  createdAt    DateTime      @default(now())
+  status       OrderStatus   @default(ordered)
+  orderedBooks OrderedBook[]
+}
+
+model OrderedBook {
+  id       String @id @default(uuid())
+  bookId   String
+  quantity Int
+  orderId  String
+  order    Order  @relation(fields: [orderId], references: [id])
+}
