@@ -12,5 +12,17 @@ router.post(
   validateRequest(BookValidation.create),
   BookController.insertIntoDB
 );
+router.get('/:id', BookController.getSingleBook);
+router.delete(
+  '/:id',
+  auth(ENUM_USER_ROLE.ADMIN),
+  BookController.deleteSingleBook
+);
+router.patch(
+  '/:id',
+  auth(ENUM_USER_ROLE.ADMIN),
+  validateRequest(BookValidation.update),
+  BookController.updateSingleBook
+);
 
 export const BookRouter = router;

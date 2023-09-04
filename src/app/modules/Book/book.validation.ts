@@ -24,6 +24,11 @@ const create = z.object({
 const update = z.object({
   body: z.object({
     title: z.string().optional(),
+    author: z.string().optional(),
+    genre: z.string().optional(),
+    price: z.number().optional(),
+    publicationDate: z.string().optional(),
+    categoryId: z.string().optional(),
   }),
 });
 export const BookValidation = {
