@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+import { Secret } from 'jsonwebtoken';
 import config from '../../../config';
+import { jwtHelpers } from '../../../helpers/jwtHelpers';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { UserService } from './user.service';
@@ -82,6 +84,21 @@ const updateUser = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const userProfile = catchAsync(async (req: Request, res: Response) => {
+  const token = req?.headers?.authorization;
+  let verifiedUser = null;
+  if (token) {
+    verifiedUser = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
+  }
+  const userId = verifiedUser?.userId;
+  const result = await UserService.getProfile(userId);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Single User data updated Successfully',
+    data: result,
+  });
+});
 export const UserController = {
   insertIntoDB,
   getAllUsers,
@@ -89,4 +106,5 @@ export const UserController = {
   getSingleUser,
   deleteSingleUser,
   updateUser,
+  userProfile,
 };

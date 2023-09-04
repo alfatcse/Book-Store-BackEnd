@@ -127,6 +127,21 @@ const updateSingleUser = async (
   });
   return result;
 };
+const getProfile = async (id: string): Promise<Partial<User | null>> => {
+  const result = await prisma.user.findUnique({
+    where: { id },
+    select: {
+      name: true,
+      email: true,
+      role: true,
+      contactNo: true,
+      address: true,
+      profileImg: true,
+      password: true,
+    },
+  });
+  return result;
+};
 export const UserService = {
   insertIntoDB,
   getAllUsers,
@@ -134,4 +149,5 @@ export const UserService = {
   getSingleUser,
   deleteSingleUser,
   updateSingleUser,
+  getProfile,
 };

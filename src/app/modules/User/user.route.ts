@@ -24,4 +24,9 @@ router.patch(
   validateRequest(UserValidation.update),
   UserController.updateUser
 );
+router.get(
+  '/',
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.CUSTOMER),
+  UserController.userProfile
+);
 export const UserRouter = router;
