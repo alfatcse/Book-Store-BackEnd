@@ -1,4 +1,5 @@
 import express from 'express';
+import { BookRouter } from '../modules/Book/book.router';
 import { CategoryRouter } from '../modules/Category/category.route';
 import { UserRouter } from '../modules/User/user.route';
 
@@ -15,6 +16,10 @@ const moduleRoutes = [
   {
     path: '/categories',
     route: CategoryRouter,
+  },
+  {
+    path: '/books',
+    route: BookRouter,
   },
 ];
 moduleRoutes.forEach(route => router.use(route.path, route.route));

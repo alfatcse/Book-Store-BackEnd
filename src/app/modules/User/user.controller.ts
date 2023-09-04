@@ -11,7 +11,6 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
     secure: config.env === 'production',
     httpOnly: true,
   };
-  console.log(result);
   res.cookie('authorization', result.token, cookieOptions);
   sendResponse(res, {
     statusCode: httpStatus.OK,
