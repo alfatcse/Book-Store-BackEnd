@@ -36,6 +36,24 @@ const getAllOrdersOfCustomers = async (
     where: {
       userId: id,
     },
+    include: {
+      orderedBooks: true,
+    },
+  });
+  return result;
+};
+const getOrderById = async (
+  id: string,
+  userId: string
+): Promise<Partial<Order> | null> => {
+  const result = await prisma.order.findFirst({
+    where: {
+      id,
+      userId,
+    },
+    include: {
+      orderedBooks: true,
+    },
   });
   return result;
 };
@@ -43,4 +61,5 @@ export const OrderService = {
   insertIntoDB,
   getAllOrders,
   getAllOrdersOfCustomers,
+  getOrderById,
 };

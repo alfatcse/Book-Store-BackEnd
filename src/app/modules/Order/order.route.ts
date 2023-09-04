@@ -9,6 +9,11 @@ router.get('/', auth(ENUM_USER_ROLE.ADMIN), OrderController.getAllOrders);
 router.get(
   '/customer-order',
   auth(ENUM_USER_ROLE.CUSTOMER),
-  OrderController.getAllOrders
+  OrderController.getSingleOrder
+);
+router.get(
+  '/:orderId',
+  auth(ENUM_USER_ROLE.CUSTOMER, ENUM_USER_ROLE.ADMIN),
+  OrderController.getOrderById
 );
 export const OrderRouter = router;

@@ -41,10 +41,34 @@ const getAllOrdersCustomer = catchAsync(async (req: Request, res: Response) => {
   });
 });
 const getSingleOrder = catchAsync(async (req: Request, res: Response) => {
-  const id = req?.headers?.authorization;
+  const token = req?.headers?.authorization;
+  let verifiedUser = null;
+  if (token) {
+    verifiedUser = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
+  }
+  const id = verifiedUser?.userId;
+  console.log(id);
   let result;
   if (id) {
     result = await OrderService.getAllOrdersOfCustomers(id);
+  }
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order Created Successfully',
+    data: result,
+  });
+});
+const getOrderById = catchAsync(async (req: Request, res: Response) => {
+  const token = req?.headers?.authorization;
+  let verifiedUser = null;
+  if (token) {
+    verifiedUser = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
+  }
+  const userId = verifiedUser?.userId;
+  let result;
+  if (userId) {
+    result = await OrderService.getOrderById(req.params.orderId, userId);
   }
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -58,4 +82,5 @@ export const OrderController = {
   getAllOrders,
   getAllOrdersCustomer,
   getSingleOrder,
+  getOrderById,
 };

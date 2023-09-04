@@ -99,6 +99,11 @@
             "date": 1693854163703,
             "name": "/Users/apple/Desktop/Programming/Lavel2/Assignment8/Book Collection/logs/winston/successes/phu-2023-04-09-21-success.log",
             "hash": "191ff1c0800ffdde48a278ddf32c93d2c6e8350be0fef08e8205d61f422edcae"
+        },
+        {
+            "date": 1693857819248,
+            "name": "/Users/apple/Desktop/Programming/Lavel2/Assignment8/Book Collection/logs/winston/successes/phu-2023-04-09-22-success.log",
+            "hash": "21e8623e6ff225ddc92c73ed62ab45150d3d1f72e22f7bed2dd0295e64d87b74"
         }
     ],
     "hashType": "sha256"
