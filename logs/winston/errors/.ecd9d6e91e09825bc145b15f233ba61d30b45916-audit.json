@@ -44,6 +44,21 @@
             "date": 1693771233320,
             "name": "/Users/apple/Desktop/Programming/Lavel2/Assignment8/Book Collection/logs/winston/errors/phu-2023-03-09-22-error.log",
             "hash": "21cfb47fa851e1dadd9f5d6cd7d67a8f3f175ae42c138fc7953cd8c10c48ca57"
+        },
+        {
+            "date": 1693775497519,
+            "name": "/Users/apple/Desktop/Programming/Lavel2/Assignment8/Book Collection/logs/winston/errors/phu-2023-03-09-23-error.log",
+            "hash": "e57f13e980ce08ea03f02d4433684e2825e4f62c6da3fe32ce4f7204a73d0992"
+        },
+        {
+            "date": 1693778406538,
+            "name": "/Users/apple/Desktop/Programming/Lavel2/Assignment8/Book Collection/logs/winston/errors/phu-2023-04-09-00-error.log",
+            "hash": "6666fb4e2d3fd7bedaaf042027517050a54b71c4959f8c8af3ff5a6506d7f368"
+        },
+        {
+            "date": 1693816188186,
+            "name": "/Users/apple/Desktop/Programming/Lavel2/Assignment8/Book Collection/logs/winston/errors/phu-2023-04-09-10-error.log",
+            "hash": "80eb290215fded44775fcda49fb7d53106a85555729fc116cedbb902d7fe0e7d"
         }
     ],
     "hashType": "sha256"

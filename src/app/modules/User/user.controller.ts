@@ -80,7 +80,7 @@ const updateUser = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Single User data deleted Successfully',
+    message: 'Single User data updated Successfully',
     data: result,
   });
 });
