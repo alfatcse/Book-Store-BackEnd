@@ -1,6 +1,9 @@
 import { Book } from '@prisma/client';
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
+import { paginationHelpers } from '../../../helpers/paginationHelper';
+import { IGenericResponse } from '../../../interfaces/common';
+import { IPaginationOptions } from '../../../interfaces/pagination';
 import prisma from '../../../shared/prisma';
 import { IBook } from './book.interface';
 
@@ -54,9 +57,24 @@ const deleteSingleBook = async (id: string) => {
   }
   return result;
 };
+const getBooksByCategoryId = async (
+  categoryId: string,
+  options: IPaginationOptions
+): Promise<IGenericResponse<Partial<Book[]>>> => {
+  const { limit, page, skip } = paginationHelpers.calculatePagination(options);
+  const result = await prisma.book.findMany({
+    where: { categoryId: categoryId },
+    skip,
+    take: limit,
+    include: { category: true },
+  });
+  const total = await prisma.book.count({ where: { categoryId: categoryId } });
+  return { meta: { total, page, limit }, data: result };
+};
 export const BookService = {
   insertIntoDB,
   getSingleBook,
   updateSingleBook,
   deleteSingleBook,
+  getBooksByCategoryId,
 };

@@ -13,6 +13,7 @@ router.post(
   BookController.insertIntoDB
 );
 router.get('/:id', BookController.getSingleBook);
+router.get('/:categoryId/category', BookController.getBooksByCategoryId);
 router.delete(
   '/:id',
   auth(ENUM_USER_ROLE.ADMIN),
