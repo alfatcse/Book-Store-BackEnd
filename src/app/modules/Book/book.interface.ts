@@ -6,3 +6,12 @@ export type IBook = {
   publicationDate: string;
   categoryId: string;
 };
+export type IBookFilterRequest = {
+  title?: string | undefined;
+  author?: string | undefined;
+  genre?: string | undefined;
+  price?: number | undefined;
+  publicationDate?: string | undefined;
+  categoryId?: string | undefined;
+  searchTerm?: string | undefined;
+};

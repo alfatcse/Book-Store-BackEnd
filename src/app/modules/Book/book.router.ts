@@ -13,6 +13,7 @@ router.post(
   BookController.insertIntoDB
 );
 router.get('/:id', BookController.getSingleBook);
+router.get('/', BookController.getAllBook);
 router.get('/:categoryId/category', BookController.getBooksByCategoryId);
 router.delete(
   '/:id',

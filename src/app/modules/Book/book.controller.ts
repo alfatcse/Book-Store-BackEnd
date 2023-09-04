@@ -3,6 +3,7 @@ import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
+import { bookFilterableFields } from './book.constants';
 import { BookService } from './book.service';
 const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   const result = await BookService.insertIntoDB(req.body);
@@ -15,6 +16,18 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
 });
 const getSingleBook = catchAsync(async (req: Request, res: Response) => {
   const result = await BookService.getSingleBook(req.params.id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Book fetched Successfully',
+    data: result,
+  });
+});
+const getAllBook = catchAsync(async (req: Request, res: Response) => {
+  console.log(req.query);
+  const filters = pick(req.query, bookFilterableFields);
+  const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+  const result = await BookService.getAllBooks(filters, options);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -41,7 +54,13 @@ const deleteSingleBook = catchAsync(async (req: Request, res: Response) => {
   });
 });
 const getBooksByCategoryId = catchAsync(async (req: Request, res: Response) => {
-  const options = pick(req.query, ['limit', 'page', 'sortBy']);
+  const options = pick(req.query, [
+    'limit',
+    'page',
+    'sortBy',
+    'sortBy',
+    'sortOrder',
+  ]);
   const result = await BookService.getBooksByCategoryId(
     req.params.categoryId,
     options
@@ -59,4 +78,5 @@ export const BookController = {
   updateSingleBook,
   deleteSingleBook,
   getBooksByCategoryId,
+  getAllBook,
 };
