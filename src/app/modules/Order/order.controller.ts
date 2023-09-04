@@ -22,6 +22,40 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const getAllOrders = catchAsync(async (req: Request, res: Response) => {
+  const result = await OrderService.getAllOrders();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order Created Successfully',
+    data: result,
+  });
+});
+const getAllOrdersCustomer = catchAsync(async (req: Request, res: Response) => {
+  const result = await OrderService.getAllOrders();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order Created Successfully',
+    data: result,
+  });
+});
+const getSingleOrder = catchAsync(async (req: Request, res: Response) => {
+  const id = req?.headers?.authorization;
+  let result;
+  if (id) {
+    result = await OrderService.getAllOrdersOfCustomers(id);
+  }
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order Created Successfully',
+    data: result,
+  });
+});
 export const OrderController = {
   insertIntoDB,
+  getAllOrders,
+  getAllOrdersCustomer,
+  getSingleOrder,
 };
